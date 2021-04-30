@@ -131,6 +131,12 @@
     <ClInclude Include="include\engine\Component\ComponentGroupInterface.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="src\TransformScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DragonFactory.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\shaders\circ.frag">

@@ -6,11 +6,10 @@
 class DragonFactory : public Factory {
 public:
 	static GameObject* create() {
-		GameObject* dragon = new GameObject(name);
-		return dragon;
-	}
-	static GameObject* create(GameObject* parent) {
-		GameObject* dragon = new GameObject(name, parent);
+		GameObject* dragon = GameObject::create("dragon");
+		dragon->addComponent<Transform>();
+		//Renderer* renderer = dragon->addComponent<Renderer>();
+
 		return dragon;
 	}
 private:

@@ -8,7 +8,7 @@ class Component : public Object
 {
 public:
 	Component() = delete;
-	Component(std::shared_ptr<GameObject> obj);
+	Component(const std::shared_ptr<GameObject>& obj);
 	virtual ~Component();
 protected:
 	std::shared_ptr<GameObject> getCurrentObject();

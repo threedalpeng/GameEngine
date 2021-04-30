@@ -4,23 +4,25 @@ GameObject::GameObjectList GameObject::_gameObjectList = GameObjectList();
 
 GameObject::GameObject(std::string name) : Object() {
 	setName(name);
-	_gameObjectList.insert(std::make_pair(_name, shared_from_this()));
-}
-
-GameObject::GameObject(std::string name, const std::shared_ptr<GameObject>& parent) : Object(), _parent(parent) {
-	setName(name);
-	_gameObjectList.insert(std::make_pair(_name, shared_from_this()));
 }
 
 GameObject::~GameObject()
 {
 }
 
-void GameObject::setParent(std::shared_ptr<GameObject> obj) {
+GameObject* GameObject::create(std::string name)
+{
+	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(name);
+	_gameObjectList.insert(std::make_pair(obj->name(), obj));
+	return obj.get();
+}
+
+void GameObject::setParent(const std::shared_ptr<GameObject>& obj) {
 	_parent = obj;
 }
 
 void GameObject::addChildren(const std::shared_ptr<GameObject>& obj) {
+	obj->setParent(shared_from_this());
 	_children.insert(obj);
 }
 
@@ -41,16 +43,16 @@ void GameObject::setName(std::string name) {
 	std::string finalName = name;
 	int countName = 0;
 	GameObjectList::iterator it;
-	while ((it = _gameObjectList.find(finalName)) == _gameObjectList.cend()) {
-		finalName = name + " (" + std::to_string(++countName) + ")";
+	while ((it = _gameObjectList.find(finalName)) != _gameObjectList.cend()) { // until not found
+		finalName = name + "(" + std::to_string(++countName) + ")";
 	}
 	_name = finalName;
 }
 
-std::shared_ptr<GameObject> GameObject::find(std::string name) {
+GameObject* GameObject::find(std::string name) {
 	auto it = _gameObjectList.find(name);
 	if (it == _gameObjectList.cend()) { // not found
 		return nullptr;
 	}
-	return it->second;
+	return it->second.get();
 }

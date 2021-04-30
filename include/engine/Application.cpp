@@ -46,8 +46,6 @@ void Application::loadScene(Scene* scene)
 	// Initiate Managers By Scene
 	_graphicsManager.init(scene);
 
-	ServiceLocator::provide<ComponentManager>(&_componentManager);
-
 	_current_scene->init();
 }
 
@@ -73,6 +71,8 @@ void Application::init()
 	glfwSetMouseButtonCallback(_window, [](GLFWwindow* window, int button, int action, int mods) {
 		static_cast<Application*>(glfwGetWindowUserPointer(window))->mouse(window, button, action, mods);
 		});
+
+	ServiceLocator::provide<ComponentManager>(&_componentManager);
 }
 
 void Application::fixedUpdate()

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <set>
+#include <unordered_set>
 #include "engine/Object/GameObject.h"
 
 class Scene {
@@ -17,5 +17,5 @@ public:
 	std::string frag_shader_path;
 
 private:
-	std::multiset<GameObject*> _rootObjects;
+	std::unordered_set<GameObject*> _rootObjects;
 };

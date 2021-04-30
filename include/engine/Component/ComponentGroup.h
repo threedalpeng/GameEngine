@@ -31,13 +31,15 @@ private:
 #include "engine/Object/GameObject.h"
 
 template<typename T>
-ComponentGroup<T>::ComponentGroup() : ComponentGroupInterface() {}
+ComponentGroup<T>::ComponentGroup() : ComponentGroupInterface() {
+	_componentList = std::unordered_map<ObjectId, std::shared_ptr<T>>();
+}
 
 template<typename T>
 std::shared_ptr<T> ComponentGroup<T>::create(const std::shared_ptr<GameObject>& obj) {
-	auto result = _componentList.emplace(obj->objectId(), std::make_shared(obj));
+	auto result = _componentList.emplace(obj->objectId(), std::make_shared<T>(obj));
 	if (result.second) {
-		return &(result.first->second);
+		return result.first->second;
 	}
 	else {
 		return nullptr;
@@ -51,7 +53,7 @@ std::shared_ptr<T> ComponentGroup<T>::find(ObjectId id) {
 		return nullptr;
 	}
 	else {
-		return &(it->second);
+		return it->second;
 	}
 }
 

@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 #include "engine/Scene.h"
 #include "engine/Input.h"
 #include "engine/Transform/Transform.h"
@@ -9,20 +11,28 @@ public:
 	TransformScene() : Scene() {};
 
 	void init() {
+		printHelp();
+
 		GameObject* dragon = DragonFactory::create();
-		Transform* transform = dragon->addComponent<Transform>();
+		Transform* transform = dragon->getComponent<Transform>();
 		transform->translate(0.f, 0.f, 0.f);
 		addObject(dragon);
+		std::cout << "GameObject Created: " << dragon->name() << std::endl;
 
 		dragon = DragonFactory::create();
-		transform = dragon->addComponent<Transform>();
+		transform = dragon->getComponent<Transform>();
 		transform->translate(100.f, 0.f, 100.f);
 		addObject(dragon);
+		std::cout << "GameObject Created: " << dragon->name() << std::endl;
 
 		dragon = DragonFactory::create();
-		transform = dragon->addComponent<Transform>();
+		transform = dragon->getComponent<Transform>();
 		transform->translate(-100.f, 0.f, 100.f);
 		addObject(dragon);
+		std::cout << "GameObject Created: " << dragon->name() << std::endl;
+
+		dragon = GameObject::find("dragon");
+		std::cout << "Test: Find GameObject " << dragon->name() << std::endl;
 	}
 
 	void update() {

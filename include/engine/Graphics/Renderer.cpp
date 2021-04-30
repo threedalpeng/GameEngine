@@ -12,7 +12,7 @@ void Renderer::render(Shader& shader)
 	if (mesh && mesh->getVertexArray())
 		glBindVertexArray(mesh->getVertexArray());
 
-	Transform* transform = getCurrentObject()->getComponent<Transform>().get();
+	Transform* transform = getCurrentObject()->getComponent<Transform>();
 	mat4 model_matrix = transform->getModelMatrix();
 
 	glUniformMatrix4fv(shader.getUniformLocation("model_matrix"), 1, GL_TRUE, model_matrix);

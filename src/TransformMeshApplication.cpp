@@ -1,5 +1,5 @@
 #include "engine/Application.h"
-//#include "TransformScene.h"
+#include "TransformScene.h"
 
 class TransformApplication : public Application {
 public:
@@ -7,8 +7,8 @@ public:
 private:
 	void init() {
 		Application::init();
-		//Scene* scene = new TransformScene();
-		//loadScene(new TransformScene());
+		Scene* scene = new TransformScene();
+		loadScene(scene);
 	}
 
 	void update(float duration) {

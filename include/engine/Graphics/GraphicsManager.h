@@ -18,5 +18,5 @@ public:
 
 private:
 	Shader shader;
-	ComponentGroup<Renderer>* _rendererList;
+	ComponentGroup<Renderer>* _rendererList = nullptr;
 };
