@@ -152,9 +152,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\engine\Script\ScriptLoader.cpp" />
     <ClCompile Include="include\engine\Component\ComponentGroupInterface.cpp" />
     <ClCompile Include="include\engine\Component\ComponentGroup.cpp" />
     <ClCompile Include="include\engine\Component\ComponentManager.cpp" />
+    <ClCompile Include="include\engine\Graphics\Camera.cpp" />
+    <ClCompile Include="include\engine\Script\Script.cpp" />
     <ClCompile Include="include\engine\Transform\Transform.cpp" />
     <ClCompile Include="include\engine\Graphics\GraphicsManager.cpp" />
     <ClCompile Include="include\engine\Graphics\Mesh.cpp" />
@@ -170,15 +173,20 @@
     <ClCompile Include="include\engine\Scene.cpp" />
     <ClCompile Include="include\engine\ServiceLocator.cpp" />
     <ClCompile Include="src\TransformMeshApplication.cpp" />
+    <ClCompile Include="include\engine\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\engine\Script\ScriptLoader.h" />
+    <ClInclude Include="src\Scripts\GameManagerScript.h" />
     <ClInclude Include="include\engine\Component\ComponentGroupInterface.h" />
     <ClInclude Include="include\engine\Component\ComponentGroup.h" />
     <ClInclude Include="include\engine\Component\ComponentManager.h" />
+    <ClInclude Include="include\engine\Graphics\Camera.h" />
     <ClInclude Include="include\engine\Graphics\GraphicsManager.h" />
     <ClInclude Include="include\engine\Graphics\Mesh.h" />
     <ClInclude Include="include\engine\Graphics\Renderer.h" />
     <ClInclude Include="include\engine\Graphics\Shader.h" />
+    <ClInclude Include="include\engine\Script\Script.h" />
     <ClInclude Include="include\engine\ServiceLocator.h" />
     <ClInclude Include="include\engine\Transform\Transform.h" />
     <ClInclude Include="include\engine\Object\Factory.h" />
@@ -192,12 +200,14 @@
     <ClInclude Include="include\engine\Scene.h" />
     <ClInclude Include="src\DragonFactory.h" />
     <ClInclude Include="src\TransformScene.h" />
+    <ClInclude Include="include\engine\Time.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\mesh\dragon.index.bin" />
     <None Include="bin\mesh\dragon.vertex.bin" />
-    <None Include="bin\shaders\circ.frag" />
-    <None Include="bin\shaders\circ.vert" />
+    <None Include="bin\shaders\transform.frag" />
+    <None Include="bin\shaders\transform.vert" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="bin\mesh\dragon.license.txt" />

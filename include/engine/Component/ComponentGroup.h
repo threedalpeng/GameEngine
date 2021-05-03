@@ -9,10 +9,10 @@ class ComponentGroup : public ComponentGroupInterface {
 public:
 	static_assert(std::is_base_of<Component, T>::value, "T must be a component.");
 
+	ComponentGroup();
+
 	using ComponentListIterator = typename std::unordered_map<ObjectId, std::shared_ptr<T>>::iterator;
 	using ComponentListConstIterator = typename std::unordered_map<ObjectId, std::shared_ptr<T>>::const_iterator;
-
-	ComponentGroup();
 
 	std::shared_ptr<T> create(const std::shared_ptr<GameObject>& obj);
 	std::shared_ptr<T> find(ObjectId id);
@@ -25,25 +25,20 @@ public:
 	ComponentListConstIterator cend();
 
 private:
-	std::unordered_map<ObjectId, std::shared_ptr<T>> _componentList;
+	std::unordered_multimap<ObjectId, std::shared_ptr<T>> _componentList;
 };
 
 #include "engine/Object/GameObject.h"
 
 template<typename T>
 ComponentGroup<T>::ComponentGroup() : ComponentGroupInterface() {
-	_componentList = std::unordered_map<ObjectId, std::shared_ptr<T>>();
+	_componentList = std::unordered_multimap<ObjectId, std::shared_ptr<T>>();
 }
 
 template<typename T>
 std::shared_ptr<T> ComponentGroup<T>::create(const std::shared_ptr<GameObject>& obj) {
-	auto result = _componentList.emplace(obj->objectId(), std::make_shared<T>(obj));
-	if (result.second) {
-		return result.first->second;
-	}
-	else {
-		return nullptr;
-	}
+	auto it = _componentList.emplace(obj->objectId(), std::make_shared<T>(obj));
+	return it->second;
 }
 
 template<typename T>

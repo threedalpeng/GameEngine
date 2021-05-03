@@ -3,9 +3,10 @@
 #include <string>
 #include <unordered_map>
 #include <typeindex>
+
+class Component;
 class ComponentManager;
 #include "Object.h"
-#include "engine/Component/Component.h"
 
 class GameObject : public Object, public std::enable_shared_from_this<GameObject>
 {
@@ -19,6 +20,8 @@ public:
 	template <typename T>
 	T* getComponent();
 	template <typename T>
+	std::vector<T*> getComponents();
+	template <typename T>
 	T* addComponent();
 
 	void addChildren(const std::shared_ptr<GameObject>& obj);
@@ -28,7 +31,7 @@ public:
 	void setName(std::string name);
 
 private:
-	using ComponentList = std::unordered_map<std::type_index, std::shared_ptr<Component>>;
+	using ComponentList = std::unordered_multimap<std::type_index, std::shared_ptr<Component>>;
 	using GameObjectList = std::unordered_map<std::string, std::shared_ptr<GameObject>>;
 
 	std::string _name;
@@ -40,6 +43,7 @@ private:
 	void setParent(const std::shared_ptr<GameObject>& obj);
 };
 
+#include "engine/Component/Component.h"
 #include "engine/ServiceLocator.h"
 
 template<typename T>
@@ -53,13 +57,22 @@ T* GameObject::getComponent() {
 }
 
 template<typename T>
+std::vector<T*> GameObject::getComponents()
+{
+	static_assert(std::is_base_of<Component, T>::value, "T must be a Component.");
+	auto itPair = _components.equal_range(typeid(T));
+	std::vector<T*> v;
+	for (auto it = itPair.first; it != itPair.second; it++) {
+		v.push_back(reinterpret_cast<T*>(it->second.get()));
+	}
+	return v;
+}
+
+template<typename T>
 T* GameObject::addComponent() {
 	static_assert(std::is_base_of<Component, T>::value, "T must be a Component.");
-	auto it = _components.find(typeid(T));
-	if (it == _components.cend()) { // not found
-		std::shared_ptr<T> component = ServiceLocator::getService<ComponentManager>()->create<T>(shared_from_this());
-		_components.emplace(typeid(T), component);
-		return component.get();
-	}
-	return nullptr;
+
+	std::shared_ptr<T> component = ServiceLocator::getService<ComponentManager>()->create<T>(shared_from_this());
+	_components.emplace(typeid(T), component);
+	return component.get();
 }

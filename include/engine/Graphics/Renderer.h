@@ -7,8 +7,10 @@
 class Renderer : public Component
 {
 public:
-	void loadMesh(std::string vertex_binary_path, std::string index_binary_path);
+	Renderer(std::shared_ptr<GameObject> obj);
+
+	void loadMesh(Mesh* mesh);
 	void render(Shader& shader);
 private:
-	Mesh* mesh = nullptr;
+	Mesh* _mesh = nullptr;
 };

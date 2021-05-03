@@ -1,11 +1,20 @@
 #pragma once
 #include "cg/cgmath.h"
-#include "engine/Object/Object.h"
+#include "engine/Object/GameObject.h"
+#include "engine/Graphics/Shader.h"
 
-class Camera : Object
+class Camera : public Component
 {
 public:
-	Camera() : Object() {};
+	Camera(std::shared_ptr<GameObject> obj) : Component(obj) {};
+
+	void update(ivec2 window_size, Shader& shader) {
+		aspect_ratio = window_size.x / static_cast<float>(window_size.y);
+		projection_matrix = mat4::perspective(fovy, aspect_ratio, dNear, dFar);
+
+		glUniformMatrix4fv(shader.getUniformLocation("view_matrix"), 1, GL_TRUE, view_matrix);
+		glUniformMatrix4fv(shader.getUniformLocation("projection_matrix"), 1, GL_TRUE, projection_matrix);
+	}
 
 	vec3 eye = vec3(0, 30, 300);
 	vec3 at = vec3(0, 0, 0);

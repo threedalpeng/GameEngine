@@ -12,5 +12,5 @@ void Transform::rotate(float x, float y, float z)
 
 mat4 Transform::getModelMatrix()
 {
-	return mat4();
+	return mat4::translate(position) * mat4::scale(scale);
 }

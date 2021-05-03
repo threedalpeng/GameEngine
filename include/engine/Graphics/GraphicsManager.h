@@ -4,9 +4,9 @@
 #include "engine/Scene.h"
 #include "engine/Graphics/Shader.h"
 #include "engine/Graphics/Renderer.h"
+#include "engine/Graphics/Camera.h"
 #include "engine/ServiceLocator.h"
 #include "engine/Component/ComponentManager.h"
-#include "engine/Graphics/Renderer.h"
 
 class GraphicsManager
 {

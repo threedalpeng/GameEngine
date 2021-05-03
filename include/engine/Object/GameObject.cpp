@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "engine/Transform/Transform.h"
+#include "engine/Component/ComponentManager.h"
 
 GameObject::GameObjectList GameObject::_gameObjectList = GameObjectList();
 
@@ -13,8 +15,9 @@ GameObject::~GameObject()
 GameObject* GameObject::create(std::string name)
 {
 	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(name);
-	_gameObjectList.insert(std::make_pair(obj->name(), obj));
-	return obj.get();
+	obj->addComponent<Transform>();
+	auto resultPair = _gameObjectList.insert(std::make_pair(obj->name(), obj));
+	return resultPair.first->second.get();
 }
 
 void GameObject::setParent(const std::shared_ptr<GameObject>& obj) {

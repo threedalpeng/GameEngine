@@ -75,6 +75,18 @@
     <ClCompile Include="include\engine\Component\ComponentGroupInterface.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="include\engine\Script\Script.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="include\engine\Graphics\Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="include\engine\Script\ScriptLoader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="include\engine\Time.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\engine\Application.h">
@@ -137,20 +149,32 @@
     <ClInclude Include="src\DragonFactory.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\Script\Script.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\Graphics\Camera.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scripts\GameManagerScript.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\Script\ScriptLoader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\Time.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\shaders\circ.frag">
-      <Filter>리소스 파일\Shader</Filter>
-    </None>
-    <None Include="bin\shaders\circ.vert">
-      <Filter>리소스 파일\Shader</Filter>
-    </None>
     <None Include="bin\mesh\dragon.index.bin">
       <Filter>리소스 파일\Mesh</Filter>
     </None>
     <None Include="bin\mesh\dragon.vertex.bin">
       <Filter>리소스 파일\Mesh</Filter>
     </None>
+    <None Include="bin\shaders\transform.frag" />
+    <None Include="bin\shaders\transform.vert" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="bin\mesh\dragon.license.txt">

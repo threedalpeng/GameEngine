@@ -11,7 +11,8 @@ private:
 		loadScene(scene);
 	}
 
-	void update(float duration) {
+	void update() {
+		Application::update();
 		if (Input::getKeyDown(GLFW_KEY_ESCAPE) || Input::getKeyDown(GLFW_KEY_Q)) {
 			glfwSetWindowShouldClose(_window, GL_TRUE);
 		}

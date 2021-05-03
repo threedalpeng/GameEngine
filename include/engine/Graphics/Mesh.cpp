@@ -1,6 +1,12 @@
 #include "Mesh.h"
+#include <iostream>
 
-inline Mesh::~Mesh()
+Mesh::Mesh() {
+	vertex_list = std::vector<vertex>();
+	index_list = std::vector<uint>();
+}
+
+Mesh::~Mesh()
 {
 	if (vertex_buffer) glDeleteBuffers(1, &vertex_buffer);
 	if (index_buffer) glDeleteBuffers(1, &index_buffer);

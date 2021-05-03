@@ -24,6 +24,9 @@ protected:
 	uint _frame_count = 0;
 	float _frame_rate = 100;
 
+	// Shader
+	Shader shader;
+
 	// Scene
 	Scene* _current_scene = nullptr;
 	void loadScene(Scene* scene);
@@ -31,12 +34,11 @@ protected:
 	// Managers
 	Input			 _input;
 	ComponentManager _componentManager;
-	GraphicsManager  _graphicsManager;
 
 	// Application Lifecycle
 	virtual void init();
 	virtual void fixedUpdate();
-	virtual void update(float duration);
+	virtual void update();
 	virtual void render();
 	virtual void terminate();
 
@@ -44,5 +46,5 @@ protected:
 	virtual void reshape(GLFWwindow* window, int width, int height);
 	virtual void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods);
 	virtual void mouse(GLFWwindow* window, int button, int action, int mods);
-	virtual void move(GLFWwindow* window, int button, int action, int mods);
+	virtual void motion(GLFWwindow* window, double x, double y);
 };

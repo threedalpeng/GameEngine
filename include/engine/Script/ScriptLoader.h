@@ -1,11 +1,17 @@
 #pragma once
 #include "engine/Component/Component.h"
+#include "Script.h"
 
 class ScriptLoader : public Component
 {
 public:
-	ScriptLoader(GameObject* obj) : Component(obj) {}
-	void loadScript() {
+	ScriptLoader(std::shared_ptr<GameObject> obj) : Component(obj) {}
+	std::vector<Script*>& getScripts() {
+		return scripts;
+	}
+	void addScript(Script* script) {
+		scripts.push_back(script);
 	}
 private:
+	std::vector<Script*> scripts;
 };

@@ -1,5 +1,7 @@
 #include "engine/Application.h"
 #include "engine/Transform/Transform.h"
+#include "engine/Script/ScriptLoader.h"
+#include "engine/Time.h"
 
 Application::Application(const char* title, ivec2 window_size)
 	: _title(title), _window_size(window_size) {}
@@ -7,30 +9,25 @@ Application::Application(const char* title, ivec2 window_size)
 void Application::run()
 {
 	init();
-
-	float t, prev_t = (float)glfwGetTime(), duration;
-	float lag = 0.f, fixed_time = 1.f / _frame_rate;
+	Time::init();
+	Time::setFixedUpdateRate(_frame_rate);
 
 	for (_frame_count = 0; !glfwWindowShouldClose(_window); _frame_count++) {
-		t = (float)glfwGetTime();
-		duration = t - prev_t;
-		prev_t = t;
-		lag += duration;
+		Time::updateDelta();
 
 		glfwPollEvents();
 		Input::poll();
 
 		// fixed time update
-		while (lag >= fixed_time) {
+		while (Time::needsFixedUpdate()) {
 			fixedUpdate();
-			lag -= fixed_time;
 		}
 
 		if (_frame_count % 20 == 0) {
 			printf("                           \r");
-			printf(" FPS: %f\r", 1 / duration);
+			printf(" FPS: %f\r", 1 / Time::delta());
 		}
-		update(duration);
+		update();
 		render();
 	}
 
@@ -41,10 +38,8 @@ void Application::loadScene(Scene* scene)
 {
 	_current_scene = scene;
 
-	_componentManager.createComponentList<Transform>();
-
 	// Initiate Managers By Scene
-	_graphicsManager.init(scene);
+	shader.loadFrom(scene->vert_shader_path, scene->frag_shader_path);
 
 	_current_scene->init();
 }
@@ -71,21 +66,45 @@ void Application::init()
 	glfwSetMouseButtonCallback(_window, [](GLFWwindow* window, int button, int action, int mods) {
 		static_cast<Application*>(glfwGetWindowUserPointer(window))->mouse(window, button, action, mods);
 		});
+	glfwSetCursorPosCallback(_window, [](GLFWwindow* window, double x, double y) {
+		static_cast<Application*>(glfwGetWindowUserPointer(window))->motion(window, x, y);
+		});
 
 	ServiceLocator::provide<ComponentManager>(&_componentManager);
+
+	glEnable(GL_CULL_FACE);									   // turn on backface culling
+	glEnable(GL_DEPTH_TEST);								   // turn on depth tests
 }
 
 void Application::fixedUpdate()
 {
 }
 
-void Application::update(float duration)
+void Application::update()
 {
+	for (auto it = _componentManager.cbegin<ScriptLoader>(); it != _componentManager.cend<ScriptLoader>(); it++) {
+		ScriptLoader* scriptLoader = it->second.get();
+		for (auto script : scriptLoader->getScripts()) {
+			script->update();
+		}
+	}
+	for (auto it = _componentManager.cbegin<Camera>(); it != _componentManager.cend<Camera>(); it++) {
+		Camera* camera = it->second.get();
+		camera->update(_window_size, shader);
+	}
 }
 
 void Application::render()
 {
-	_graphicsManager.render();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(shader.getProgram());
+
+	for (auto it = _componentManager.cbegin<Renderer>(); it != _componentManager.cend<Renderer>(); it++) {
+		Renderer* renderer = (*it).second.get();
+		renderer->render(shader);
+	}
+
+	glfwSwapBuffers(_window);
 }
 
 void Application::terminate()
@@ -104,8 +123,11 @@ void Application::keyboard(GLFWwindow* window, int key, int scancode, int action
 
 void Application::mouse(GLFWwindow* window, int button, int action, int mods)
 {
+	dvec2 pos;
+	glfwGetCursorPos(window, &pos.x, &pos.y);
+	Input::processMouseEvent(button, action, mods, pos);
 }
 
-void Application::move(GLFWwindow* window, int button, int action, int mods)
+void Application::motion(GLFWwindow* window, double x, double y)
 {
 }
