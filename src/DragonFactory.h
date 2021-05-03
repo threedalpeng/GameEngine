@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
-#include "engine/Object/Factory.h"
-#include "engine/Transform/Transform.h"
-#include "engine/Graphics/Renderer.h"
+#include "engine/Core.h"
 
 class DragonFactory : public Factory {
 public:

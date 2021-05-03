@@ -15,6 +15,7 @@ GameObject::~GameObject()
 GameObject* GameObject::create(std::string name)
 {
 	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(name);
+	obj->_thisPtr = obj;
 	obj->addComponent<Transform>();
 	auto resultPair = _gameObjectList.insert(std::make_pair(obj->name(), obj));
 	return resultPair.first->second.get();
@@ -24,13 +25,23 @@ void GameObject::setParent(const std::shared_ptr<GameObject>& obj) {
 	_parent = obj;
 }
 
-void GameObject::addChildren(const std::shared_ptr<GameObject>& obj) {
-	obj->setParent(shared_from_this());
-	_children.insert(obj);
+GameObject* GameObject::getParent()
+{
+	return _parent.lock().get();
 }
 
-void GameObject::removeChildren(const std::shared_ptr<GameObject>& obj) {
-	_children.erase(obj);
+std::multiset<std::shared_ptr<GameObject>>& GameObject::getChildren()
+{
+	return _children;
+}
+
+void GameObject::addChildren(GameObject* obj) {
+	obj->setParent(shared_from_this());
+	_children.insert(obj->shared_from_this());
+}
+
+void GameObject::removeChildren(GameObject* obj) {
+	_children.erase(obj->shared_from_this());
 }
 
 std::string GameObject::name() {

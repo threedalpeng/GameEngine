@@ -1,9 +1,6 @@
 #pragma once
 #include <iostream>
-#include "engine/Input.h"
-#include "engine/Time.h"
-#include "engine/Script/Script.h"
-#include "engine/Transform/Transform.h"
+#include "engine/Core.h"
 
 class GameManagerScript : public Script
 {
@@ -11,12 +8,18 @@ public:
 	GameManagerScript() : Script() {}
 
 	std::vector<GameObject*> dragons = std::vector<GameObject*>(3);
+	std::vector<GameObject*> axis = std::vector<GameObject*>(2);
 
 	void init() override {
 		printHelp();
 	}
 
 	void update() override {
+		Transform* transform = axis[0]->getComponent<Transform>();
+		transform->rotation.y += 1.f * Time::delta();
+		transform = axis[1]->getComponent<Transform>();
+		transform->rotation.y -= 1.f * Time::delta();
+
 		if (Input::getKeyDown(GLFW_KEY_KP_ADD) ||
 			(Input::getKeyDown(GLFW_KEY_EQUAL) && Input::getKey(GLFW_KEY_LEFT_SHIFT))) {
 			if (NUM_INSTANCE < MAX_INSTANCE)

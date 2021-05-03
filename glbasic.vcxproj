@@ -159,7 +159,6 @@
     <ClCompile Include="include\engine\Graphics\Camera.cpp" />
     <ClCompile Include="include\engine\Script\Script.cpp" />
     <ClCompile Include="include\engine\Transform\Transform.cpp" />
-    <ClCompile Include="include\engine\Graphics\GraphicsManager.cpp" />
     <ClCompile Include="include\engine\Graphics\Mesh.cpp" />
     <ClCompile Include="include\engine\Graphics\Renderer.cpp" />
     <ClCompile Include="include\engine\Graphics\Shader.cpp" />
@@ -176,13 +175,13 @@
     <ClCompile Include="include\engine\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\engine\Core.h" />
     <ClInclude Include="include\engine\Script\ScriptLoader.h" />
     <ClInclude Include="src\Scripts\GameManagerScript.h" />
     <ClInclude Include="include\engine\Component\ComponentGroupInterface.h" />
     <ClInclude Include="include\engine\Component\ComponentGroup.h" />
     <ClInclude Include="include\engine\Component\ComponentManager.h" />
     <ClInclude Include="include\engine\Graphics\Camera.h" />
-    <ClInclude Include="include\engine\Graphics\GraphicsManager.h" />
     <ClInclude Include="include\engine\Graphics\Mesh.h" />
     <ClInclude Include="include\engine\Graphics\Renderer.h" />
     <ClInclude Include="include\engine\Graphics\Shader.h" />

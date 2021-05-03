@@ -24,8 +24,11 @@ public:
 	template <typename T>
 	T* addComponent();
 
-	void addChildren(const std::shared_ptr<GameObject>& obj);
-	void removeChildren(const std::shared_ptr<GameObject>& obj);
+	GameObject* getParent();
+	std::multiset<std::shared_ptr<GameObject>>& getChildren();
+
+	void addChildren(GameObject* obj);
+	void removeChildren(GameObject* obj);
 
 	std::string name();
 	void setName(std::string name);
@@ -36,6 +39,7 @@ private:
 
 	std::string _name;
 	ComponentList _components;
+	std::weak_ptr<GameObject> _thisPtr;
 	std::weak_ptr<GameObject> _parent;
 	std::multiset<std::shared_ptr<GameObject>> _children;
 	static GameObjectList _gameObjectList;

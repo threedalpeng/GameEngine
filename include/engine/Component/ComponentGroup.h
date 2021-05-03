@@ -11,8 +11,8 @@ public:
 
 	ComponentGroup();
 
-	using ComponentListIterator = typename std::unordered_map<ObjectId, std::shared_ptr<T>>::iterator;
-	using ComponentListConstIterator = typename std::unordered_map<ObjectId, std::shared_ptr<T>>::const_iterator;
+	using ComponentListIterator = typename std::unordered_multimap<ObjectId, std::shared_ptr<T>>::iterator;
+	using ComponentListConstIterator = typename std::unordered_multimap<ObjectId, std::shared_ptr<T>>::const_iterator;
 
 	std::shared_ptr<T> create(const std::shared_ptr<GameObject>& obj);
 	std::shared_ptr<T> find(ObjectId id);

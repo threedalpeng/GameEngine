@@ -14,8 +14,12 @@ public:
 
 	void translate(float x, float y, float z);
 	void rotate(float x, float y, float z);
+
+	void calculateModelMatrix();
 	mat4 getModelMatrix();
 
 	void lookAt(const Transform& transform) {
 	}
+private:
+	mat4 _modelMatrix;
 };

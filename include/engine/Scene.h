@@ -7,10 +7,12 @@ class Scene {
 public:
 	Scene() {}
 	virtual void init();
-	virtual void update();
 
 	void addObject(GameObject* obj) {
 		_rootObjects.insert(obj);
+	}
+	std::unordered_set<GameObject*>& getRootObjects() {
+		return _rootObjects;
 	}
 
 	std::string vert_shader_path;

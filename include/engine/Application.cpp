@@ -1,7 +1,19 @@
 #include "engine/Application.h"
+#include "engine/Graphics/Renderer.h"
+#include "engine/Graphics/Camera.h"
 #include "engine/Transform/Transform.h"
 #include "engine/Script/ScriptLoader.h"
 #include "engine/Time.h"
+
+void iterateTransform(GameObject* obj) {
+	Transform* transform = obj->getComponent<Transform>();
+	transform->calculateModelMatrix();
+	auto children = obj->getChildren();
+	if (children.empty()) return;
+	for (auto child : children) {
+		iterateTransform(child.get());
+	}
+}
 
 Application::Application(const char* title, ivec2 window_size)
 	: _title(title), _window_size(window_size) {}
@@ -88,6 +100,11 @@ void Application::update()
 			script->update();
 		}
 	}
+
+	for (auto rootObj : _current_scene->getRootObjects()) {
+		iterateTransform(rootObj);
+	}
+
 	for (auto it = _componentManager.cbegin<Camera>(); it != _componentManager.cend<Camera>(); it++) {
 		Camera* camera = it->second.get();
 		camera->update(_window_size, shader);
@@ -98,6 +115,10 @@ void Application::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shader.getProgram());
+
+	Camera* mainCamera = Camera::main;
+	glUniformMatrix4fv(shader.getUniformLocation("view_matrix"), 1, GL_TRUE, mainCamera->view_matrix);
+	glUniformMatrix4fv(shader.getUniformLocation("projection_matrix"), 1, GL_TRUE, mainCamera->projection_matrix);
 
 	for (auto it = _componentManager.cbegin<Renderer>(); it != _componentManager.cend<Renderer>(); it++) {
 		Renderer* renderer = (*it).second.get();

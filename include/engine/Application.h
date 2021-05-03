@@ -5,7 +5,7 @@
 #include "engine/Input.h"
 #include "engine/Scene.h"
 #include "engine/Component/ComponentManager.h"
-#include "engine/Graphics/GraphicsManager.h"
+#include "engine/Graphics/Shader.h"
 
 class Application {
 public:
