@@ -36,9 +36,6 @@
     <ClCompile Include="include\engine\Scene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\TransformMeshApplication.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="include\engine\Component\Component.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -82,6 +79,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="include\engine\Time.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TexPhong\TexPhongApplication.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="include\engine\Graphics\Light.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="include\engine\Graphics\Material.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,19 +143,10 @@
     <ClInclude Include="include\engine\Component\ComponentGroupInterface.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\TransformScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DragonFactory.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\Script\Script.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\Graphics\Camera.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scripts\GameManagerScript.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\Script\ScriptLoader.h">
@@ -159,6 +156,24 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\Core.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexPhong\Scripts\CameraScript.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexPhong\TexPhongScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexPhong\Scripts\BustScript.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cg\stb_image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\Graphics\Light.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\Graphics\Material.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

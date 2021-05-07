@@ -10,6 +10,7 @@ public:
 		return scripts;
 	}
 	void addScript(Script* script) {
+		script->setObject(getCurrentObject().get());
 		scripts.push_back(script);
 	}
 private:

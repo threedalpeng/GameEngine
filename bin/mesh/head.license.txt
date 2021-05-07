@@ -1,0 +1,3 @@
+The Head model is provided through the courtesy of Morgan McGuire Computer Graphics Archive. Please refer to the following URL for the license terms. 
+
+https://casual-effects.com/g3d/data10/index.html#mesh22

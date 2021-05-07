@@ -18,9 +18,11 @@ public:
 	static bool getMouseButtonUp(int button_code);
 
 	static void processKeyEvent(int key, int scancode, int action, int mods);
-	static void processMouseEvent(int button, int action, int mods, dvec2 pos);
+	static void processMouseClickEvent(int button, int action, int mods);
+	static void processMouseMoveEvent(dvec2 pos);
 
 	static dvec2 getCursorPoint();
+	static dvec2 getCursorAxis();
 
 private:
 	enum KeyState {
@@ -39,4 +41,5 @@ private:
 	static std::vector<KeyState> mouse;
 
 	static dvec2 cursor_pos;
+	static dvec2 cursor_axis;
 };

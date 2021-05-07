@@ -8,6 +8,7 @@ public:
 	~Mesh();
 
 	void loadMesh(std::string vertex_binary_path, std::string index_binary_path);
+	void loadTexture(std::string texture_path);
 	GLuint getVertexArray();
 
 	std::vector<vertex>	vertex_list;

@@ -9,6 +9,7 @@ std::vector<bool> Input::current_mouse(MOUSE_COUNT);
 std::vector<Input::KeyState> Input::mouse(MOUSE_COUNT);
 
 dvec2 Input::cursor_pos = dvec2();
+dvec2 Input::cursor_axis = dvec2();
 
 Input::Input() {
 	for (int i = 0; i < KEY_COUNT; i++) {
@@ -93,8 +94,7 @@ void Input::processKeyEvent(int key, int scancode, int action, int mods) {
 	}
 }
 
-void Input::processMouseEvent(int button, int action, int mods, dvec2 pos) {
-	cursor_pos = pos;
+void Input::processMouseClickEvent(int button, int action, int mods) {
 	if (action == GLFW_PRESS) {
 		current_mouse[button] = true;
 	}
@@ -103,6 +103,15 @@ void Input::processMouseEvent(int button, int action, int mods, dvec2 pos) {
 	}
 }
 
+void Input::processMouseMoveEvent(dvec2 pos) {
+	cursor_axis = pos - cursor_pos;
+	cursor_pos = pos;
+}
+
 dvec2 Input::getCursorPoint() {
 	return cursor_pos;
+}
+
+dvec2 Input::getCursorAxis() {
+	return cursor_axis;
 }

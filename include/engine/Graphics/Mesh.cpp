@@ -46,6 +46,11 @@ void Mesh::loadMesh(std::string vertex_binary_path, std::string index_binary_pat
 	if (!vertex_array) { printf("%s(): failed to create vertex aray\n", __func__); return; }
 }
 
+void Mesh::loadTexture(std::string texture_path)
+{
+	texture = cg_create_texture(texture_path.c_str());
+}
+
 GLuint Mesh::getVertexArray()
 {
 	return vertex_array;

@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\engine\Graphics\Light.cpp" />
     <ClCompile Include="include\engine\Script\ScriptLoader.cpp" />
     <ClCompile Include="include\engine\Component\ComponentGroupInterface.cpp" />
     <ClCompile Include="include\engine\Component\ComponentGroup.cpp" />
@@ -171,13 +172,15 @@
     <ClCompile Include="include\engine\Object\Object.cpp" />
     <ClCompile Include="include\engine\Scene.cpp" />
     <ClCompile Include="include\engine\ServiceLocator.cpp" />
-    <ClCompile Include="src\TransformMeshApplication.cpp" />
     <ClCompile Include="include\engine\Time.cpp" />
+    <ClCompile Include="include\engine\Graphics\Material.cpp" />
+    <ClCompile Include="src\TexPhong\TexPhongApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\cg\stb_image.h" />
     <ClInclude Include="include\engine\Core.h" />
+    <ClInclude Include="include\engine\Graphics\Light.h" />
     <ClInclude Include="include\engine\Script\ScriptLoader.h" />
-    <ClInclude Include="src\Scripts\GameManagerScript.h" />
     <ClInclude Include="include\engine\Component\ComponentGroupInterface.h" />
     <ClInclude Include="include\engine\Component\ComponentGroup.h" />
     <ClInclude Include="include\engine\Component\ComponentManager.h" />
@@ -197,9 +200,11 @@
     <ClInclude Include="include\engine\Application.h" />
     <ClInclude Include="include\engine\Object\Object.h" />
     <ClInclude Include="include\engine\Scene.h" />
-    <ClInclude Include="src\DragonFactory.h" />
-    <ClInclude Include="src\TransformScene.h" />
     <ClInclude Include="include\engine\Time.h" />
+    <ClInclude Include="include\engine\Graphics\Material.h" />
+    <ClInclude Include="src\TexPhong\Scripts\BustScript.h" />
+    <ClInclude Include="src\TexPhong\Scripts\CameraScript.h" />
+    <ClInclude Include="src\TexPhong\TexPhongScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\mesh\dragon.index.bin" />

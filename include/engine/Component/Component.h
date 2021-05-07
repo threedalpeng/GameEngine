@@ -10,13 +10,13 @@ public:
 	Component() = delete;
 	Component(const std::shared_ptr<GameObject>& obj);
 	virtual ~Component();
-protected:
-	std::shared_ptr<GameObject> getCurrentObject();
 
 	template <typename T>
 	T* getComponent();
 	template <typename T>
 	std::vector<T*> getComponents();
+
+	std::shared_ptr<GameObject> getCurrentObject();
 private:
 	std::weak_ptr<GameObject> _gameObject;
 };
