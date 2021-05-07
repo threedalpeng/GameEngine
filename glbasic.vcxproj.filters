@@ -81,13 +81,13 @@
     <ClCompile Include="include\engine\Time.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\TexPhong\TexPhongApplication.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="include\engine\Graphics\Light.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="include\engine\Graphics\Material.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TransformMesh\TransformMeshApplication.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,15 +158,6 @@
     <ClInclude Include="include\engine\Core.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\TexPhong\Scripts\CameraScript.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TexPhong\TexPhongScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TexPhong\Scripts\BustScript.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="include\cg\stb_image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -174,6 +165,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\Graphics\Material.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TransformMesh\Scripts\GameManagerScript.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TransformMesh\DragonFactory.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TransformMesh\TransformScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -186,7 +186,6 @@
     </None>
     <None Include="bin\shaders\transform.frag" />
     <None Include="bin\shaders\transform.vert" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="bin\mesh\dragon.license.txt">

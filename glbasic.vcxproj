@@ -174,7 +174,7 @@
     <ClCompile Include="include\engine\ServiceLocator.cpp" />
     <ClCompile Include="include\engine\Time.cpp" />
     <ClCompile Include="include\engine\Graphics\Material.cpp" />
-    <ClCompile Include="src\TexPhong\TexPhongApplication.cpp" />
+    <ClCompile Include="src\TransformMesh\TransformMeshApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cg\stb_image.h" />
@@ -202,16 +202,15 @@
     <ClInclude Include="include\engine\Scene.h" />
     <ClInclude Include="include\engine\Time.h" />
     <ClInclude Include="include\engine\Graphics\Material.h" />
-    <ClInclude Include="src\TexPhong\Scripts\BustScript.h" />
-    <ClInclude Include="src\TexPhong\Scripts\CameraScript.h" />
-    <ClInclude Include="src\TexPhong\TexPhongScene.h" />
+    <ClInclude Include="src\TransformMesh\DragonFactory.h" />
+    <ClInclude Include="src\TransformMesh\Scripts\GameManagerScript.h" />
+    <ClInclude Include="src\TransformMesh\TransformScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\mesh\dragon.index.bin" />
     <None Include="bin\mesh\dragon.vertex.bin" />
     <None Include="bin\shaders\transform.frag" />
     <None Include="bin\shaders\transform.vert" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="bin\mesh\dragon.license.txt" />
