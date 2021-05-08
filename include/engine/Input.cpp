@@ -1,30 +1,32 @@
 #include "Input.h"
 
 const int Input::KEY_COUNT = GLFW_KEY_LAST + 1;
-std::vector<bool> Input::current_keys(KEY_COUNT);
+std::vector<bool> Input::currentKeys(KEY_COUNT);
 std::vector<Input::KeyState> Input::keys(KEY_COUNT);
 
 const int Input::MOUSE_COUNT = GLFW_MOUSE_BUTTON_LAST + 1;
-std::vector<bool> Input::current_mouse(MOUSE_COUNT);
+std::vector<bool> Input::currentMouse(MOUSE_COUNT);
 std::vector<Input::KeyState> Input::mouse(MOUSE_COUNT);
 
-dvec2 Input::cursor_pos = dvec2();
-dvec2 Input::cursor_axis = dvec2();
+dvec2 Input::cursorPos = dvec2();
+bool Input::mouseMoved = false;
+dvec2 Input::currentCursorAxis = dvec2();
+dvec2 Input::cursorAxis = dvec2();
 
 Input::Input() {
 	for (int i = 0; i < KEY_COUNT; i++) {
-		current_keys[i] = false;
+		currentKeys[i] = false;
 		keys[i] = KeyState::RELEASED;
 	}
 	for (int i = 0; i < MOUSE_COUNT; i++) {
-		current_mouse[i] = false;
+		currentMouse[i] = false;
 		mouse[i] = KeyState::RELEASED;
 	}
 }
 
 void Input::poll() {
 	for (int i = 0; i < KEY_COUNT; i++) {
-		if (current_keys[i]) {
+		if (currentKeys[i]) {
 			if (keys[i] == KeyState::RELEASED) {
 				keys[i] = KeyState::PRESSED_ONCE;
 			}
@@ -42,7 +44,7 @@ void Input::poll() {
 		}
 	}
 	for (int i = 0; i < MOUSE_COUNT; i++) {
-		if (current_mouse[i]) {
+		if (currentMouse[i]) {
 			if (mouse[i] == KeyState::RELEASED) {
 				mouse[i] = KeyState::PRESSED_ONCE;
 			}
@@ -59,59 +61,72 @@ void Input::poll() {
 			}
 		}
 	}
+
+	if (mouseMoved) {
+		cursorAxis = currentCursorAxis;
+		mouseMoved = false;
+	}
+	else {
+		cursorAxis = dvec2(0);
+	}
 }
 
-bool Input::getKey(int key_code) {
-	return keys[key_code] == KeyState::PRESSED_ONCE || keys[key_code] == KeyState::PRESSED;
+bool Input::getKey(int keyCode) {
+	return keys[keyCode] == KeyState::PRESSED_ONCE || keys[keyCode] == KeyState::PRESSED;
 }
 
-bool Input::getKeyDown(int key_code) {
-	return keys[key_code] == KeyState::PRESSED_ONCE;
+bool Input::getKeyDown(int keyCode) {
+	return keys[keyCode] == KeyState::PRESSED_ONCE;
 }
 
-bool Input::getKeyUp(int key_code) {
-	return keys[key_code] == KeyState::RELEASED_ONCE;
+bool Input::getKeyUp(int keyCode) {
+	return keys[keyCode] == KeyState::RELEASED_ONCE;
 }
 
-bool Input::getMouseButton(int button_code) {
-	return mouse[button_code] == KeyState::PRESSED_ONCE || keys[button_code] == KeyState::PRESSED;
+bool Input::getMouseButton(int buttonCode) {
+	return mouse[buttonCode] == KeyState::PRESSED_ONCE || mouse[buttonCode] == KeyState::PRESSED;
 }
 
-bool Input::getMouseButtonDown(int button_code) {
-	return mouse[button_code] == KeyState::PRESSED_ONCE;
+bool Input::getMouseButtonDown(int buttonCode) {
+	return mouse[buttonCode] == KeyState::PRESSED_ONCE;
 }
 
-bool Input::getMouseButtonUp(int button_code) {
-	return mouse[button_code] == KeyState::RELEASED_ONCE;
+bool Input::getMouseButtonUp(int buttonCode) {
+	return mouse[buttonCode] == KeyState::RELEASED_ONCE;
 }
 
 void Input::processKeyEvent(int key, int scancode, int action, int mods) {
 	if (action == GLFW_PRESS) {
-		current_keys[key] = true;
+		currentKeys[key] = true;
 	}
 	else if (action == GLFW_RELEASE) {
-		current_keys[key] = false;
+		currentKeys[key] = false;
 	}
 }
-
 void Input::processMouseClickEvent(int button, int action, int mods) {
 	if (action == GLFW_PRESS) {
-		current_mouse[button] = true;
+		currentMouse[button] = true;
 	}
 	else if (action == GLFW_RELEASE) {
-		current_mouse[button] = false;
+		currentMouse[button] = false;
 	}
 }
 
-void Input::processMouseMoveEvent(dvec2 pos) {
-	cursor_axis = pos - cursor_pos;
-	cursor_pos = pos;
+#include <iostream>
+void Input::processMouseMoveEvent(dvec2 pos, ivec2 windowSize) {
+	mouseMoved = true;
+	dvec2 cursorChange = pos - cursorPos;
+	currentCursorAxis = dvec2(
+		(cursorChange.x / (static_cast<double>(windowSize.x) - 1.0)) * 2.0,
+		-(cursorChange.y / (static_cast<double>(windowSize.y) - 1.0)) * 2.0
+	);
+	cursorPos = pos;
 }
 
 dvec2 Input::getCursorPoint() {
-	return cursor_pos;
+	return cursorPos;
 }
 
 dvec2 Input::getCursorAxis() {
-	return cursor_axis;
+	return cursorAxis;
 }

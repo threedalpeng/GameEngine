@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Scene.h"
 #include "Time.h"
+#include "Math.h"
 
 #include "Object/GameObject.h"
 #include "Object/Factory.h"

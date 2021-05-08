@@ -183,5 +183,5 @@ void Application::motion(GLFWwindow* window, double x, double y)
 {
 	dvec2 pos;
 	glfwGetCursorPos(window, &pos.x, &pos.y);
-	Input::processMouseMoveEvent(pos);
+	Input::processMouseMoveEvent(pos, _window_size);
 }

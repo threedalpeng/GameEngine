@@ -19,9 +19,9 @@ public:
 
 	void update() override {
 		Transform* transform = axis[0]->getComponent<Transform>();
-		transform->rotate(0.f, 90.f * Time::delta(), 0.f);
+		transform->rotate(vec3(0, 1, 0), 90.f * Time::delta());
 		transform = axis[1]->getComponent<Transform>();
-		transform->rotate(0.f, -90.f * Time::delta(), 0.f);
+		transform->rotate(vec3(0, 1, 0), -90.f * Time::delta());
 
 		if (Input::getKeyDown(GLFW_KEY_KP_ADD) ||
 			(Input::getKeyDown(GLFW_KEY_EQUAL) && Input::getKey(GLFW_KEY_LEFT_SHIFT))) {
@@ -60,7 +60,7 @@ public:
 				transform->translate(Time::delta() * vec3(0.f, 1.f, 0.f) * moveScale);
 			}
 			if (Input::getKey(GLFW_KEY_Q)) {
-				transform->position += Time::delta() * vec3(0.f, -1.f, 0.f) * moveScale;
+				transform->translate(Time::delta() * vec3(0.f, -1.f, 0.f) * moveScale);
 			}
 			if (Input::getKey(GLFW_KEY_W)) {
 				transform->position += Time::delta() * vec3(0.f, 0.f, 1.f) * moveScale;
@@ -76,16 +76,15 @@ public:
 			}
 		}
 		if (Input::getKey(GLFW_KEY_LEFT_SHIFT)) {
-			// heading: y, attitude: x, bank: z
 			Transform* dtransform = dragons[0]->getComponent<Transform>();
 			if (Input::getKeyDown(GLFW_KEY_X)) {
-				dtransform->rotate(90, 0, 0);
+				dtransform->rotate(vec3(1, 0, 0), 90);
 			}
 			else if (Input::getKeyDown(GLFW_KEY_Y)) {
-				dtransform->rotate(0, 90, 0);
+				dtransform->rotate(vec3(0, 1, 0), 90);
 			}
 			else if (Input::getKeyDown(GLFW_KEY_Z)) {
-				dtransform->rotate(0, 0, 90);
+				dtransform->rotate(vec3(0, 0, 1), 90);
 			}
 		}
 	}

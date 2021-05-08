@@ -13,7 +13,7 @@ public:
 		Transform* transform = getComponent<Transform>();
 		eye = transform->worldPosition;
 		//at = transform->localToWorldPos(vec3(0.f, 0.f, 1.f));
-		//up = transform->localToWorldPos(vec3(0.f, 1.f, 0.f));
+		up = transform->localToWorldPos(vec3(0.f, 1.f, 0.f));
 		if (trackingMode) {
 			at = target->worldPosition;
 		}
@@ -27,6 +27,11 @@ public:
 		up = _up;
 	}
 
+	void activateTracking(Transform* _target) {
+		trackingMode = true;
+		target = _target;
+		at = target->worldPosition;
+	}
 	void activateTracking(Transform* _target, vec3 _up) {
 		trackingMode = true;
 		target = _target;
@@ -56,5 +61,5 @@ public:
 	mat4 view_matrix = mat4::look_at(eye, at, up);
 private:
 	bool trackingMode = false;
-	Transform* target;
+	Transform* target = nullptr;
 };

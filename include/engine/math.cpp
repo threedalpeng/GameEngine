@@ -1,5 +1,6 @@
-#include "engine/math.h"
+#include "engine/Math.h"
 
+/*
 namespace engine {
 	template<typename T>
 	inline Vector2<T>::Vector2() : x(0), y(0) {}
@@ -105,3 +106,4 @@ namespace engine {
 		return Vector2<T>();
 	}
 }
+*/
