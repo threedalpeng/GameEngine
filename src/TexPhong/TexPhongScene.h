@@ -21,7 +21,6 @@ public:
 	void init() {
 		Mesh* mesh = new Mesh();
 		mesh->loadMesh("mesh/head.vertex.bin", "mesh/head.index.bin");
-		mesh->loadTexture("mesh/head.jpg");
 
 		Mesh* box = create_box_mesh();
 
@@ -30,6 +29,7 @@ public:
 		GameObject* bust = GameObject::create("Bust");
 		Renderer* renderer = bust->addComponent<Renderer>();
 		renderer->loadMesh(mesh);
+		renderer->loadTexture("mesh/head.jpg");
 		renderer->loadMaterial(material);
 		bust->addComponent<ScriptLoader>()->addScript(new BustScript());
 		addObject(bust);

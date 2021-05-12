@@ -14,7 +14,13 @@ void Transform::translate(float x, float y, float z) {
 void Transform::rotate(vec3 axis, float angle) {
 	Quaternion q = Quaternion::axisAngle(axis, angle);
 	rotation = rotation * q;
-	q.toAxisAngle();
+}
+
+void Transform::rotateAround(vec3 worldPoint, vec3 axis, float angle)
+{
+	Quaternion q = Quaternion::axisAngle(axis, angle);
+	position = q * (position - worldPoint) + worldPoint;
+	rotation = q * rotation;
 }
 
 void Transform::update() {
@@ -49,8 +55,12 @@ mat4 Transform::getModelMatrix() {
 	return _modelMatrix;
 }
 
-vec3 Transform::localToWorldPos(vec3 v)
+vec3 Transform::localToWorldPoint(vec3 v)
 {
-	vec4 result = _modelMatrix * vec4(v, 1.f);
-	return vec3(result.x, result.y, result.z);
+	return mat3(_modelMatrix) * v;
+}
+
+vec3 Transform::worldToLocalPoint(vec3 v)
+{
+	return mat3(_modelMatrix).transpose() * v;
 }

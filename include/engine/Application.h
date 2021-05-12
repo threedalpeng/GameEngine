@@ -9,13 +9,13 @@
 
 class Application {
 public:
-	Application(const char* title, ivec2 window_size);
+	Application(std::string title, ivec2 window_size);
 
 	// run application
 	virtual void run();
 
 protected:
-	const char* _title;
+	std::string _title;
 
 	// window objects
 	GLFWwindow* _window = nullptr;

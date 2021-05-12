@@ -15,6 +15,7 @@ Mesh::~Mesh()
 
 void Mesh::loadMesh(std::string vertex_binary_path, std::string index_binary_path)
 {
+	/* source code from "cg/cgut.h"*/
 	// load vertex buffer
 	mem_t v = cg_read_binary(vertex_binary_path.c_str());
 	if (v.size % sizeof(vertex)) { printf("%s is not a valid vertex binary file\n", vertex_binary_path.c_str()); return; }
@@ -44,11 +45,6 @@ void Mesh::loadMesh(std::string vertex_binary_path, std::string index_binary_pat
 	// generate vertex array object, which is mandatory for OpenGL 3.3 and higher
 	vertex_array = cg_create_vertex_array(vertex_buffer, index_buffer);
 	if (!vertex_array) { printf("%s(): failed to create vertex aray\n", __func__); return; }
-}
-
-void Mesh::loadTexture(std::string texture_path)
-{
-	texture = cg_create_texture(texture_path.c_str());
 }
 
 GLuint Mesh::getVertexArray()

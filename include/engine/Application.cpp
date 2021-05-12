@@ -18,7 +18,7 @@ void iterateTransform(GameObject* obj) {
 	}
 }
 
-Application::Application(const char* title, ivec2 window_size)
+Application::Application(std::string title, ivec2 window_size)
 	: _title(title), _window_size(window_size) {}
 
 void Application::run()
@@ -51,7 +51,7 @@ void Application::run()
 
 void Application::init()
 {
-	if (!(_window = cg_create_window(_title, _window_size.x, _window_size.y))) {
+	if (!(_window = cg_create_window(_title.c_str(), _window_size.x, _window_size.y))) {
 		glfwTerminate();
 		exit(1);
 	}

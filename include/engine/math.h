@@ -62,6 +62,9 @@ public:
 		float tW = w * q.w - v.dot(qV);
 		return Quaternion(tV, tW).normalize();
 	}
+	inline vec3 operator*(const vec3& v) const {
+		return (mat3(this->toMatrix()) * v);
+	}
 
 	inline float length() const {
 		return sqrtf(x * x + y * y + z * z + w * w);

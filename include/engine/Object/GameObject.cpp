@@ -22,6 +22,9 @@ GameObject* GameObject::create(std::string name)
 }
 
 void GameObject::setParent(const std::shared_ptr<GameObject>& obj) {
+	if (!_parent.expired()) {
+		_parent.lock()->removeChildren(this);
+	}
 	_parent = obj;
 }
 

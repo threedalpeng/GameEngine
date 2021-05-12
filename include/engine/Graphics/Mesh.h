@@ -8,7 +8,6 @@ public:
 	~Mesh();
 
 	void loadMesh(std::string vertex_binary_path, std::string index_binary_path);
-	void loadTexture(std::string texture_path);
 	GLuint getVertexArray();
 
 	std::vector<vertex>	vertex_list;
@@ -16,5 +15,4 @@ public:
 	GLuint	vertex_buffer = 0;
 	GLuint	index_buffer = 0;
 	GLuint	vertex_array = 0;
-	GLuint	texture = 0;
 };

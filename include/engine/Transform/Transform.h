@@ -18,11 +18,13 @@ public:
 	void translate(const vec3& v);
 	void translate(float x, float y, float z);
 	void rotate(vec3 axis, float angle);
+	void rotateAround(vec3 worldPoint, vec3 axis, float angle);
 
 	void update();
 	mat4 getModelMatrix();
 
-	vec3 localToWorldPos(vec3 v);
+	vec3 localToWorldPoint(vec3 v);
+	vec3 worldToLocalPoint(vec3 v);
 	// void lookAt(Transform* target, vec3 up = vec3(0, 1, 0));
 private:
 	void calculateModelMatrix();

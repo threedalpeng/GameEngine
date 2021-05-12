@@ -13,7 +13,7 @@ public:
 		Transform* transform = getComponent<Transform>();
 		eye = transform->worldPosition;
 		//at = transform->localToWorldPos(vec3(0.f, 0.f, 1.f));
-		up = transform->localToWorldPos(vec3(0.f, 1.f, 0.f));
+		up = transform->localToWorldPoint(vec3(0.f, 1.f, 0.f));
 		if (trackingMode) {
 			at = target->worldPosition;
 		}
@@ -45,6 +45,14 @@ public:
 
 	void setThisMainCamera() {
 		main = this;
+	}
+
+	vec3 viewportToWorldPoint(vec3 v) {
+		return mat3(view_matrix).transpose() * v;
+	}
+
+	vec3 worldToViewportPoint(vec3 v) {
+		return mat3(view_matrix) * v;
 	}
 
 	float fovy = PI / 4.0f; // must be in radian
